@@ -40,7 +40,26 @@ return {
             --   codeactions = false,
             -- }
           },
+          file_browser = {
+            hidden = { file_browser = true, folder_browser = true },
+            prompt_path = true,
+          },
         },
+        pickers = {
+          find_files = {
+            find_command = {
+              "rg",
+              "--no-ignore",
+              "--hidden",
+              "--files",
+              "-g",
+              "!**/node_modules/*",
+              "-g",
+              "!**/.git/*",
+            },
+          },
+        },
+
       })
       -- To get ui-select loaded and working with telescope, you need to call
       -- load_extension, somewhere after setup function:
