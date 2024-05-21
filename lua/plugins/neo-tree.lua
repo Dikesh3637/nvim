@@ -19,6 +19,9 @@ return {
             hide_dotfiles = false,
             hide_gitignored = true,
           },
+        },
+        window = {
+          position = "right"
         }
       })
       vim.keymap.set("n", "<C-n>", ":Neotree<CR>", opts)
