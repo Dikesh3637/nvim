@@ -254,16 +254,21 @@ return {
 	{
 		"yetone/avante.nvim",
 		event = "VeryLazy",
+		lazy = false,
 		version = false, -- Never set this value to "*"! Never!
 		opts = {
 			-- add any opts here
 			-- for example
 			provider = "gemini",
-			openai = {
-				model = "gemini-2.0-flash",
+			-- cursor_applying_provider = 'groq',
+			-- behaviour = {
+			-- 	--- ... existing behaviours
+			-- 	enable_cursor_planning_mode = true, -- enable cursor planning mode!
+			-- },
+			gemini = {
+				model = "gemini-2.5-pro-exp-03-25",
 				timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
 				temperature = 0,
-				max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
 				--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
 			},
 		},
