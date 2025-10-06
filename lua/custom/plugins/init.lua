@@ -3,6 +3,12 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+	-- java.nvim
+	{
+		{
+			"nvim-java/nvim-java",
+		},
+	},
 	-- catpuccin themes
 	{
 		{
@@ -123,16 +129,21 @@ return {
 		event = "VeryLazy",
 		enabled = vim.fn.has("nvim-0.10.0") == 1,
 	},
-	-- codeium ai completion
+	-- windsurf ai completion
 	-- {
-	--   'Exafunction/codeium.nvim',
-	--     'nvim-lua/plenary.nvim',
-	--   dependencies = {
-	--     'hrsh7th/nvim-cmp',
-	--   },
-	--   config = function()
-	--     require('codeium').setup {}
-	--   end,
+	-- 	"Exafunction/windsurf.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"hrsh7th/nvim-cmp",
+	-- 	},
+	-- 	config = function()
+	-- 		require("codeium").setup({})
+	-- 	end,
+	-- },
+	--
+	-- copilot
+	-- {
+	-- 	"github/copilot.vim",
 	-- },
 	--autopair plugin
 	{
@@ -192,14 +203,14 @@ return {
 			})
 		end,
 	},
-	--augment code
-	{
-		"augmentcode/augment.vim",
-		config = function()
-			-- add your own keybindings here
-		end,
-	},
-
+	----augment code
+	--{
+	--	"augmentcode/augment.vim",
+	--	config = function()
+	--		-- add your own keybindings here
+	--	end,
+	--},
+	--
 	--typescript-tools.nvim
 	{
 		"pmizio/typescript-tools.nvim",
@@ -310,5 +321,71 @@ return {
 			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
+	},
+	--trouble nvim
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				"<leader>xL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>xQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
+	},
+	-- barbar.nvim
+	{
+		"romgrk/barbar.nvim",
+		dependencies = {
+			"lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+			"nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+		},
+		init = function()
+			vim.g.barbar_auto_setup = false
+			-- Re-order bufferlines
+			vim.keymap.set("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
+			vim.keymap.set("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
+
+			-- Close buffer
+			vim.keymap.set("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
+
+			-- Magic buffer-picking mode
+			vim.keymap.set("n", "<C-p>", "<Cmd>BufferPick<CR>", opts)
+			vim.keymap.set("n", "<C-S-p>", "<Cmd>BufferPickDelete<CR>", opts)
+		end,
+		opts = {
+			-- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+			-- animation = true,
+			-- insert_at_start = true,
+			-- …etc.
+		},
+		version = "^1.0.0", -- optional: only update when a new 1.x version is released
 	},
 }
